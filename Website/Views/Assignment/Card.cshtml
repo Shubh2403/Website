@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Website.Models.CardModel>
+
+@*@Html.Sitecore().Field("PostedDate", Model)
+    @Html.Sitecore().Field("SmallDescription", Model)
+*@
+
+<main role="main" class="container blog-posts">
+
+    <div class="main-search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search this blog">
+            <div class="input-group-append">
+
+                <button type="button" class="btn btn-dark">Search</button>
+
+            </div>
+        </div>
+    </div>
+
+
+    <br>
+
+    <div class="row">
+        <!-- Begin Repeating Elements Area -->
+        <!-- Begin Repeating Element-->
+
+        @foreach (var data in Model)
+        {
+            <div class="blog-post-card card col-lg-4 col-md-6">
+                <img src="@data.imageSrc" alt="@data.imageAlt" class="card-img-top" />
+                <div class="card-body bg-light">
+                    <strong class="d-inline-block mb-2 text-success">@data.Category</strong>
+                    <h3 class="card-title">@data.Title</h3>
+                    <div class="mb-1 text-muted">@data.PostedDate </div>
+                    <p>@data.SmallDescription</p>
+                    <a href="@Sitecore.Links.LinkManager.GetItemUrl(Sitecore.Context.Database.GetItem(@data.ID))"
+                       class="btn btn-warning btn-block">@data.ButtonText</a>
+                </div>
+            </div>
+        }
+        <!-- End Repeating Element-->
+        <!-- End Repeating Elements Area -->
+
+
+
+    </div>
+</main>
+
